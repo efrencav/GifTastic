@@ -1,79 +1,53 @@
+$("button").on("click", function() {
+    // In this case, the "this" keyword refers to the button that was clicked
+    var person = $(this).attr("data-person");
 
-// $(".gif").on("click", "#searchNow", function() {
-//     // The attr jQuery method allows us to get or set the value of any attribute on our HTML element
-//     var apikey = "lyjGjWxcgbDM3z1AfvMYWxbRhsXmOyC4"
-//     var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + q + "&api_key=" + apikey + "&limit=" + limit;
-//     var topics = ["parrot", "goose", "duck", "cat", "zebra"];
-//     var q = $('#searchTerm').val();
-//     var limit = 10;
-//     var rating = "";
-    
-//     var state = $(this).attr("data-state");
+    // Constructing a URL to search Giphy for the name of the person who said the quote
+    var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
+      person + "&api_key=dc6zaTOxFJmzC&limit=10";
 
-//     if (state === "still") {
-//       $(this).attr("src", $(this).attr("data-animate"));
-//       $(this).attr("data-state", "animate");
-//     } else {
-//       $(this).attr("src", $(this).attr("data-still"));
-//       $(this).attr("data-state", "still");
-//     }
-//     $.ajax({
-//         url: queryURL,
-//         method: "GET"
-//     })
-  
-//     .then(function(response){
-//         var results = response.data;
-//         for (var i = 0; i < results.lenth; i++){
-//             if(results[i].rating !== "r" && results[i].rating !== "pg-13") {
-//                 var gifDiv = $("<div>");
-//                 var rating = results[i].rating;
-//                 var gifImage = $("<img>");
-//                 gifImage.attr("src", results[i].images.fixed_height.url);
-  
-//                 gifImage.append(gitImage);
-//                 $("#gifs-here").prepend(gifImage);
-//             }
-//         }
-//     });
-//   });
+    var templateLiteral = `https://api.giphy.com/v1/gifs/search?q=
+      ${person}&api_key=dc6zaTOxFJmzC&limit=10`;
 
-$("#find-gif").on("click", function(event){
-    event.preventDefault();
-    var apikey = "lyjGjWxcgbDM3z1AfvMYWxbRhsXmOyC4";
-    var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + q + "&api_key=" + apikey + "&limit=" + limit;
-    var q = $("#gif-input").val();
-    var limit = 10;
-    var rating = "";
-
+    // Performing our AJAX GET request
     $.ajax({
-        url: queryURL,
-        method: "GET"
+      url: queryURL,
+      method: "GET"
     })
-    if (state === "still") {
-              $(this).attr("src", $(this).attr("data-animate"));
-              $(this).attr("data-state", "animate");
-            } else {
-              $(this).attr("src", $(this).attr("data-still"));
-              $(this).attr("data-state", "still");
-            }
-            $.ajax({
-                url: queryURL,
-                method: "GET"
-            })
-        .then(function(response){
+      // After the data comes back from the API
+      .then(function(response) {
+        // Storing an array of results in the results variable
         var results = response.data;
-        for (var i = 0; i < results.lenth; i++){
-            if(results[i].rating !== "r" && results[i].rating !== "pg-13") {
-                var gifDiv = $("<div>");
-                var rating = results[i].rating;
-                var gifImage = $("<img>");
-                gifImage.attr("src", results[i].images.fixed_height.url);
-    
-                gifImage.append(gitImage);
-                $("#gifs-here").prepend(gifImage);
-            }
+
+
+        // Looping over every result item
+        for (var i = 0; i < results.length; i++) {
+
+          // Only taking action if the photo has an appropriate rating
+          if (results[i].rating !== "r" && results[i].rating !== "pg-13") {
+            // Creating a div for the gif
+            var gifDiv = $("<div>");
+
+            // Storing the result item's rating
+            var rating = results[i].rating;
+
+            // Creating a paragraph tag with the result item's rating
+            var p = $("<p>").text("Rating: " + rating);
+
+            // Creating an image tag
+            var personImage = $("<img>");
+
+            // Giving the image tag an src attribute of a proprty pulled off the
+            // result item
+            personImage.attr("src", results[i].images.fixed_height.url);
+
+            // Appending the paragraph and personImage we created to the "gifDiv" div we created
+            gifDiv.append(p);
+            gifDiv.append(personImage);
+
+            // Prepending the gifDiv to the "#gifs-appear-here" div in the HTML
+            $("#gifs-appear-here").prepend(gifDiv);
+          }
         }
-    });
-})
-  
+      });
+  });
