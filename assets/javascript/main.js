@@ -1,53 +1,92 @@
-$("button").on("click", function() {
-    // In this case, the "this" keyword refers to the button that was clicked
-    var person = $(this).attr("data-person");
+$(document).ready(function () {
 
-    // Constructing a URL to search Giphy for the name of the person who said the quote
-    var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
-      person + "&api_key=dc6zaTOxFJmzC&limit=10";
+  var topics = ["bruce lee", "chuck norris", "kung fu", "karate", "jiu-jitsu", "mma", "street"]
 
-    var templateLiteral = `https://api.giphy.com/v1/gifs/search?q=
-      ${person}&api_key=dc6zaTOxFJmzC&limit=10`;
+  // Display Buttons
+  function showButtons() {
+      $("#buttons-area").empty();
 
-    // Performing our AJAX GET request
-    $.ajax({
-      url: queryURL,
-      method: "GET"
-    })
-      // After the data comes back from the API
-      .then(function(response) {
-        // Storing an array of results in the results variable
-        var results = response.data;
+      topics.forEach(function (val, i) {
+          var topic = topics[i];
+          topicNoSpace = topic.split(" ").join("+");
+          console.log(topicNoSpace);
+          var newButton = $("<button>");
+          newButton.addClass("topic-btn btn btn-medium btn-transparent-white margin-10px-right margin-10px-bottom");
+          newButton.attr("data-name",topicNoSpace);
+          newButton.text(topic);
+          $("#buttons-area").append(newButton);
 
-
-        // Looping over every result item
-        for (var i = 0; i < results.length; i++) {
-
-          // Only taking action if the photo has an appropriate rating
-          if (results[i].rating !== "r" && results[i].rating !== "pg-13") {
-            // Creating a div for the gif
-            var gifDiv = $("<div>");
-
-            // Storing the result item's rating
-            var rating = results[i].rating;
-
-            // Creating a paragraph tag with the result item's rating
-            var p = $("<p>").text("Rating: " + rating);
-
-            // Creating an image tag
-            var personImage = $("<img>");
-
-            // Giving the image tag an src attribute of a proprty pulled off the
-            // result item
-            personImage.attr("src", results[i].images.fixed_height.url);
-
-            // Appending the paragraph and personImage we created to the "gifDiv" div we created
-            gifDiv.append(p);
-            gifDiv.append(personImage);
-
-            // Prepending the gifDiv to the "#gifs-appear-here" div in the HTML
-            $("#gifs-appear-here").prepend(gifDiv);
-          }
-        }
       });
-  });
+  }
+  
+  // Display Gifs when button click
+  function displayGifs() {
+             
+      var searchTopic = $(this).attr("data-name");
+      var apiURL = "https://api.giphy.com/v1/gifs/search?q="+ searchTopic +"&api_key=lyjGjWxcgbDM3z1AfvMYWxbRhsXmOyC4&limit=10";
+      console.log(apiURL);
+
+      $.ajax({
+          url: apiURL,
+          method:"GET"
+      }).then(function(response) {
+          $("#gifs-area").empty();
+
+          var gifDiv = $("<div class='new-gif'>");
+          
+          var gif = response.data.length;
+
+          for(var i = 0; i < gif; i++){
+              var newRow = $("<tr>");
+              var individualDiv = $("<div class='single'>");
+              var grabRating = response.data[i].rating;
+              var rating = $("<p>").text("RATED: "+grabRating);
+              
+              var grabStill = response.data[i].images.fixed_height_still.url;
+              var grabAnimate = response.data[i].images.fixed_height.url;
+              var imageElmt = $("<img>");
+              imageElmt.addClass("gifImg");
+              imageElmt.attr("src", grabStill);
+              imageElmt.attr("data-status","still");
+              imageElmt.attr("data-still", grabStill);
+              imageElmt.attr("data-animate", grabAnimate);
+              
+              individualDiv.prepend(imageElmt);
+              newRow.prepend(rating);
+              individualDiv.prepend(newRow);
+              gifDiv.append(individualDiv);
+
+              $("#gifs-area").append(gifDiv);
+          }
+      })
+  }
+
+  // Start and Stop Animations when clicked 
+  function animateGif() {
+      if( $(this).attr("data-status") === "still" ){
+          $(this).attr("data-status", "animate");
+          $(this).attr("src", $(this).attr("data-animate"));
+      }else {
+          $(this).attr("data-status", "still");
+          $(this).attr("src", $(this).attr("data-still"));
+      }
+  }
+
+  // Run Function to Show Giphys
+  $(document).on("click",".topic-btn",displayGifs);
+  // Starts animateGif Function
+  $(document).on("click",".gifImg",animateGif);
+
+  // Add New Buttons 
+  $("#add-giphy").on("click", function(){
+      event.preventDefault();
+      var giphyNew = $("#gif-input-area").val().trim();
+      $("#gif-input-area").val("");
+      topics.push(giphyNew);
+      showButtons();
+  })
+
+  showButtons();
+
+
+});
