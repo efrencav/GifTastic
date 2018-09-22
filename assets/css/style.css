@@ -89,7 +89,7 @@ h6 {font-size:25px; line-height:30px;}
 .text-small {font-size:16px; line-height:23px;}
 .text-medium {font-size:18px; line-height:26px;}
 .text-large {font-size:20px; line-height:30px;}
-.title-large {font-size:100px; line-height:95px;}
+.title-large {font-size:60px; line-height:95px;}
 
 /* font weight */
 .font-weight-400 {font-weight: 400;}
@@ -106,6 +106,7 @@ h6 {font-size:25px; line-height:30px;}
 .text-black {color:#000}
 .text-teal {color:#4aaaa5;}
 .text-orange {color: #f05444;}
+.text-deep-pink {color: #ff214f;}
 .text-dark-gray {color: #757575}
 .text-medium-gray {color: #939393}
 
