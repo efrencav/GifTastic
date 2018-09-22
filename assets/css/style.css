@@ -33,11 +33,17 @@ input, textarea, select{
     font-size: 14px;  
     padding: 8px 15px; 
     width: 100%; margin: 0 0 20px 0; 
-    max-width: 100%; 
+    max-width: 80%; 
     resize: none;
 }
 input[type="submit"] { width: auto}
-input[type="button"], input[type="text"], input[type="email"], input[type="search"], input[type="password"], textarea, input[type="submit"] { -webkit-appearance: none; outline: none;}
+input[type="button"], 
+input[type="text"], 
+input[type="email"], 
+input[type="search"], 
+input[type="password"], 
+textarea, input[type="submit"] 
+{ -webkit-appearance: none; outline: none;}
 input:focus, textarea:focus{ border-color: #585858; outline: none; }
 input[type="button"]:focus{ outline: none; }
 
@@ -52,6 +58,8 @@ header {
 .jumbotron {
     position: relative;
     height: 40%;}
+    
+
 
 /* Headings */
 h1 {font-size:40px; line-height:45px;}
@@ -178,6 +186,15 @@ h6 {font-size:25px; line-height:30px;}
 .padding-50px-bottom {padding-bottom: 50px;}
 .padding-75px-bottom {padding-bottom: 75px;}
 .padding-100px-bottom {padding-bottom: 100px;}
+
+/* padding left */
+.padding-5px-left {padding-left: 5px;}
+.padding-10px-left {padding-left: 10px;}
+.padding-15px-left {padding-left: 15px;}
+.padding-20px-left {padding-left: 20px;}
+.padding-50px-left {padding-left: 50px;}
+.padding-75px-left {padding-left: 75px;}
+.padding-100px-left {padding-left: 100px;}
 
 .padding-fifteen-all {padding:15%;}
 
@@ -446,7 +463,7 @@ section.half-section {padding:80px 0;}
 .btn.btn-dark-gray:hover, .btn.btn-dark-gray:focus {background: transparent; color: #232323}
 .btn.btn-light-gray {background: #dbdbdb; border-color: #dbdbdb; color: #232323}
 .btn.btn-light-gray:hover, .btn.btn-light-gray:focus {background: transparent; border-color: #dbdbdb; color: #dbdbdb}
-.btn.btn-deep-pink {background: #ff214f; border-color: #ff214f; color: #ffffff}
+.btn.btn-deep-pink {background: #ff214f; border-color: #ff214f; color: #ffffff; border-color: #ff214f; outline: none; }
 .btn.btn-deep-pink:hover, .btn.btn-deep-pink:focus {background: transparent; border-color: #ff214f; color: #ff214f}
 
 /* button transparent */
@@ -593,10 +610,10 @@ textarea.input-bg {background-color: #f7f7f7; border-radius: 4px; border: 1px so
 
 .gifImg {border: 1px solid #d1d1d1; }
 
-form {
+/* form {
     width: 80%;
     margin: 50px auto;
-}
+} */
 
 .search {
     padding: 8px 15px;

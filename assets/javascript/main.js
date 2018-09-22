@@ -1,6 +1,6 @@
 $(document).ready(function () {
 
-  var topics = ["bruce lee", "chuck norris", "kung fu", "karate", "jiu-jitsu", "mma", "street"]
+  var topics = ["bruce lee", "chuck norris", "kung fu", "karate", "jiu-jitsu", "mma", "street fight"]
 
   // Display Buttons
   function showButtons() {
@@ -24,7 +24,6 @@ $(document).ready(function () {
              
       var searchTopic = $(this).attr("data-name");
       var apiURL = "https://api.giphy.com/v1/gifs/search?q="+ searchTopic +"&api_key=lyjGjWxcgbDM3z1AfvMYWxbRhsXmOyC4&limit=10";
-      console.log(apiURL);
 
       $.ajax({
           url: apiURL,
@@ -33,14 +32,14 @@ $(document).ready(function () {
           $("#gifs-area").empty();
 
           var gifDiv = $("<div class='new-gif'>");
-          
           var gif = response.data.length;
 
           for(var i = 0; i < gif; i++){
-              var newRow = $("<tr>");
-              var individualDiv = $("<div class='single'>");
-              var grabRating = response.data[i].rating;
+              var newRow = $("<div>");
+              var individualDiv = $("<div class='single float-left padding-10px-left padding-10px-top'>");
               var rating = $("<p>").text("RATED: "+grabRating);
+              var grabRating = response.data[i].rating;
+              
               
               var grabStill = response.data[i].images.fixed_height_still.url;
               var grabAnimate = response.data[i].images.fixed_height.url;

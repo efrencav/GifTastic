@@ -14,24 +14,22 @@
 </head>
 
 <body class="bg-extra-dark-gray">
-<div class="jumbotron bg-orange">
     
-        <h1 class="text-white">GIPHY Search</h1>
+        <h1 class="text-white padding-50px-top">GIPHY Search</h1>
         <div class="container">
         <!-- Rendered buttons will get dumped here  -->
         <div id="buttons-area" class="padding-20px-top"></div>
 
-        <form id="giphy-form">
-            <label for="gif-input-area" class="margin-20px-top"><span class="text-white">Search for new GIPHY</span> </label>
-            <input type="text" id="gif-input-area">
+        <form id="giphy-form" class="margin-20px-top form-inline">
+            <label for="gif-input-area"></label>
+            <input type="text" id="gif-input-area" placeholder="Search for new GiPHY">
             <br>
 
             <!-- Button triggers new movie to be added -->
-            <input id="add-giphy" type="submit" value="Search">
+            <input id="add-giphy" type="submit" value="Search" class="btn btn-deep-pink btn-white:hover padding-5px-left">
         </form>
         </div>
-    </div>
-    <section class="container"></div>
+    <section class="container no-padding-tb"></div>
         <!-- giphy will get dumped Here -->
         <div id="gifs-area"></div>
     </section>
