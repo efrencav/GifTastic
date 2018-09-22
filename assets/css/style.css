@@ -25,8 +25,6 @@ body, html { height: 100%;
     -moz-osx-font-smoothing: grayscale;
 }
 
-p {color: white;
-text-transform: uppercase;}
 
 input, textarea, select{ 
     border: 1px solid #d1d1d1; 
