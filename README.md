@@ -1,4 +1,4 @@
-# Giphy
+# GifTastic
 Unit #6 Homework
 
 This homework was challenging, it required that I go through previous class assignments and review what we covered the previous days and piece the different sections together to make this application work.
