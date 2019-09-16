@@ -1,4 +1,4 @@
-# GifTastic \
+# GifTastic 
 Unit #6 Homework
 
 UT Austin Coding Bootcamp | Unit 5 jQuery timer trivia game \
